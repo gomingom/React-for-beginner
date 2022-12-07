@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    crossorigin
+    src="https://unpkg.com/react@17/umd/react.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/@babel/standalone/babel.min.js"
+  ></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    let count = 0;
+    function render() {
+      ReactDOM.render(<App />, root);
+      //   ReactDOM.render(App, root);
+    }
+    function countUp() {
+      count = count + 1;
+      render();
+    }
+    const Title = () => <h3>Count: {count}</h3>;
+    const Btn = () => (
+      <button style={{ backgroundColor: "tomato" }} onClick={countUp}>
+        Click me!
+      </button>
+    );
+    function App() {
+      return (
+        <div>
+          <Title />
+          <Btn />
+        </div>
+      );
+    }
+    // const App = (
+    //   <div>
+    //     <Title />
+    //     <Btn />
+    //   </div>
+    // );
+    render();
+  </script>
+</html>
