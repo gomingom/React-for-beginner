@@ -11,30 +11,51 @@
   </body>
   <script
     crossorigin
-    src="https://unpkg.com/react@17/umd/react.production.min.js"
+    src="https://unpkg.com/react@17/umd/react.development.js"
   ></script>
   <script
     crossorigin
     src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
   ></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script
     crossorigin
     src="https://unpkg.com/@babel/standalone/babel.min.js"
   ></script>
   <script type="text/babel">
-    const root = document.getElementById("root");
+    function Btn({ title, onClick, fontSize = 20 }) {
+      return (
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 10px",
+            border: "0px",
+            borderRadius: "10px",
+            fontSize,
+          }}
+          onClick={onClick}
+        >
+          {title}
+        </button>
+      );
+    }
+    const MemorizedBtn = React.memo(Btn);
+    MemorizedBtn.propTypes = {
+      title: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    };
     function App() {
-      const [count, setCount] = React.useState(0);
-      const onClick = () => {
-        setCount((current) => current + 1);
-      };
+      const [value, setValue] = React.useState("Save Button");
+      const changeValue = () => setValue("Revert Change");
       return (
         <div>
-          <h3> Count: {count}</h3>
-          <button onClick={onClick}>Click me!</button>
+          <MemorizedBtn title={value} onClick={changeValue} fontSize={18} />
+          <MemorizedBtn title="Confirm" />
         </div>
       );
     }
+    const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
   </script>
 </html>
